@@ -1,2 +1,2 @@
 # visionoid
-draw graphs and visualize algorithms
+draw graphs on canvas and visualize algorithms
