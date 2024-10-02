@@ -1,0 +1,103 @@
+.canvas {
+    border: 3px solid black;
+    border-radius: 2%;
+    margin: 1px 2px;
+    height: 500px;
+    position: relative;
+    display: inline-block;
+    flex-grow: 1;
+}
+
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-editor {
+    height: 500px;
+    border: 3px solid black;
+    display: inline-block;
+    border-radius: 2%;
+}
+
+.box {
+    display: flex;
+}
+
+.expand {
+    height: 30px;
+    width:30px;
+    cursor: pointer;
+}
+
+.inputs {
+    width: 30%;
+    /* margin: auto; */
+}
+
+
+.edge {
+    text-align: center;
+    font-size: larger;
+    color: rgb(255, 127, 255);
+    background-color: brown;
+    position: absolute;
+    z-index: 2000;
+    line-height: 2;
+}
+
+.alerts-border {
+    outline-width: 4px;
+  outline-offset: 0;
+  outline-color: rgba(0, 130, 206, 0.75);
+  outline-style: solid;
+  animation-name: animateOutline;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 2;
+}
+
+.alerts-border_nonstop {
+  outline-width: 4px;
+outline-offset: 0;
+outline-color: rgba(0, 130, 206, 0.75);
+outline-style: solid;
+animation-name: animateOutline;
+animation-duration: 1s;
+animation-timing-function: ease-out;
+animation-iteration-count: infinite;
+}
+
+@keyframes animateOutline {
+    0% {
+      outline-width: 1px;
+      outline-offset: 0;
+      outline-color: rgba(0, 130, 206, 0);
+    }
+  
+    10% {
+      outline-color: rgba(0, 130, 206, 0.75);
+    }
+  
+    /* The animation finishes at 50% */
+    50% {
+      outline-width: 7px;
+      outline-offset: 4px;
+      outline-color: rgba(0, 130, 206, 0);
+    }
+  
+    100% {
+      outline-width: 7px;
+      outline-offset: 4px;
+      outline-color: rgba(102, 102, 102, 0);
+    }
+  }
