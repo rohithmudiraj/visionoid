@@ -97,7 +97,17 @@ const useAlgos = () => {
             case ALGORITHMS.HAS_PATH_BFS:
                 checkIfHasPathUsingBfs();
                 resetCanvasColors();
-                    break;    
+                break;
+
+            case ALGORITHMS.CONNECTED_COMPONENTS_COUNT_DFS:
+                countConnectedComponentsUsingDfs();
+                resetCanvasColors();
+                break;
+
+            case ALGORITHMS.CONNECTED_COMPONENTS_COUNT_BFS:
+                countConnectedComponentsUsingBfs();
+                resetCanvasColors();
+                break;
             default:
                 throw new Error("No Algorithm Selected");
         }
@@ -507,6 +517,133 @@ const useAlgos = () => {
             window.alert("path doesn't exist");
         }
     }
+
+
+
+    const countConnectedComponentsUsingDfs = ()=> {
+        if (GRAPH_REPRESENTATION.ADJACENCY_MATRIX == graphRepresentation) {
+            countConnectedComponentsUsingDfsAdjacentMatrix();
+        }
+        else if (GRAPH_REPRESENTATION.ADJACENCY_LIST == graphRepresentation) {
+            countConnectedComponentsUsingDfsAdjacentList();
+        }
+        else {
+            throw new Error("Lazy Developer has not written yet");
+        }
+    }
+
+    const countConnectedComponentsUsingDfsAdjacentMatrix = ()=> {
+        const matrix = createAdjacencyMatrix();
+        let count =0;
+        const visited = [];
+        for(let i=0;i<matrix.length;i++){
+            if(visited[i]==true || !vertices.current.some(vertex=>vertex.uniqueId==i) ){
+                continue;
+            };
+            count++;
+            const queue =[];
+            queue.push(i);
+            while(queue.length>0){
+                const curr =queue.pop();
+                for (let index = 0; index < matrix[curr].length; index++) {
+                    const hasConnection = matrix[curr][index] ==0;
+                    if(!visited[index] && hasConnection){
+                        queue.push(index);
+                        visited[index]=true;
+                    }
+                }
+            }
+        }
+        window.alert(count);
+    }
+
+    const countConnectedComponentsUsingDfsAdjacentList = ()=> {
+        const list = createAdjacencyList();
+        let count =0;
+        const visited = [];
+        for(let i=0;i<list.length;i++){
+            if(visited[i]==true || !vertices.current.some(vertex=>vertex.uniqueId==i) ){
+                continue;
+            };
+            count++;
+            const queue =[];
+            queue.push(i);
+            while(queue.length>0){
+                const curr =queue.pop();
+                for (let index = 0; index < list[curr].length; index++) {
+                    const neighbour = list[curr][index];
+                    if(!visited[neighbour]){
+                        queue.push(neighbour);
+                        visited[neighbour]=true;
+                    }
+                }
+            }
+        }
+        window.alert(count);
+    }
+
+    const countConnectedComponentsUsingBfs = ()=> {
+        if (GRAPH_REPRESENTATION.ADJACENCY_MATRIX == graphRepresentation) {
+            countConnectedComponentsUsingBfsAdjacentMatrix();
+        }
+        else if (GRAPH_REPRESENTATION.ADJACENCY_LIST == graphRepresentation) {
+            countConnectedComponentsUsingBfsAdjacentList();
+        }
+        else {
+            throw new Error("Lazy Developer has not written yet");
+        }
+    }
+
+    const countConnectedComponentsUsingBfsAdjacentMatrix = ()=> {
+        const matrix = createAdjacencyMatrix();
+        let count =0;
+        const visited = [];
+        for(let i=0;i<matrix.length;i++){
+            if(visited[i]==true || !vertices.current.some(vertex=>vertex.uniqueId==i) ){
+                continue;
+            };
+            count++;
+            let stack =[];
+            stack.push(i);
+            while(stack.length>0){
+                const curr =stack.shift();
+                for (let index = 0; index < matrix[curr].length; index++) {
+                    const hasConnection = matrix[curr][index] ==0;
+                    if(!visited[index] && hasConnection){
+                        stack = [index,...stack];
+                        visited[index]=true;
+                    }
+                }
+            }
+        }
+        window.alert(count);
+    }
+
+    const countConnectedComponentsUsingBfsAdjacentList = ()=> {
+        const list = createAdjacencyList();
+        let count =0;
+        const visited = [];
+        for(let i=0;i<list.length;i++){
+            if(visited[i]==true || !vertices.current.some(vertex=>vertex.uniqueId==i) ){
+                continue;
+            };
+            count++;
+            let stack =[];
+            stack.push(i);
+            while(stack.length>0){
+                const curr =stack.shift();
+                for (let index = 0; index < list[curr].length; index++) {
+                    const neighbour = list[curr][index];
+                    if(!visited[neighbour]){
+                        stack = [neighbour,...stack];
+                        visited[neighbour]=true;
+                    }
+                }
+            }
+        }
+        window.alert(count);
+    }
+
     return { processAlgorithm };
 
 }
